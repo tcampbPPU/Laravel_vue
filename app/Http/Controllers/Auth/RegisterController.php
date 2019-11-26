@@ -37,8 +37,8 @@ class RegisterController extends Controller
 
             return response()->json(['status' => trans('verification.sent')]);
         }
-
-        return response()->json($user);
+        $user->generateToken();
+        return response()->json($user, 201);
     }
 
     /**

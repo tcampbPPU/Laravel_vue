@@ -37,3 +37,13 @@ Route::group(['middleware' => 'guest:api'], function () {
     Route::post('oauth/{driver}', 'Auth\OAuthController@redirectToProvider');
     Route::get('oauth/{driver}/callback', 'Auth\OAuthController@handleProviderCallback')->name('oauth.callback');
 });
+
+
+
+// Throttle to 5 per minute
+// 'middleware' => 'throttle:10'
+Route::group(['middleware' => 'authkey:api'], function () {
+    Route::get('/test', function() {
+        return response()->json(['message' => 'Works'], 200);
+    });
+});
